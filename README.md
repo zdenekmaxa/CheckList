@@ -6,8 +6,10 @@ experiments subsystem control, operation and interaction.
 
 TDAQ - Trigger Data Acquision
 
-Usage: 
-    java -jar checklist.jar --help
-    java -jar checklist.jar --path ../XMLData
-    checklist.sh <TDAQ desk start script>
+Usage:
 
+```
+java -jar checklist.jar --help
+java -jar checklist.jar --path ../XMLData
+checklist.sh
+```
