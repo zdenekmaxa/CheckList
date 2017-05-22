@@ -1,0 +1,448 @@
+-----------------------------------------------------------------------------
+2009-05-06 Zdenek Maxa
+	* Tagging CheckList-00-01-03
+
+	* Problem when there hasn't been any lastly editted cell editor, check
+	  added to cover this (cells were either editted and then checkbox pressed
+	  or no modification (editting) happened at all)
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2009-04-29 Zdenek Maxa
+	* Tagging CheckList-00-01-02
+
+	* Lastly editted comment cell's content lost - according setValueAt()
+	  method was never called (unless user clicked on a different cell before
+	  submitting the checklist which forwarded editingStopped event)
+	  Invoking active cell editor explicitly before getting data from
+	  checklist table in CheckListGUI.processCompletedCheckList()
+	M src/checklist/DataTable.java
+	M src/checklist/CheckListGUI.java
+
+	* Minor, just comment
+	M src/checklist/CheckListTableModel.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2009-04-06 Zdenek Maxa
+	* Tagging CheckList-00-01-01
+
+	* Checklist file name not available if checklist select from menu when
+	  running stand-alone (just printing <not set> rather than null)
+	M src/checklist/CheckListGUI.java
+
+	* Bug fixed when converting elog system affected ArrayList to array
+	M src/checklist/CheckListData.java
+
+	* Minor, menu hints for -s, -p made clearer
+	M src/checklist/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2009-03-03 Zdenek Maxa
+	* Tagging CheckList-00-01-00
+
+	* Reimplementation of the internal data storing - affects saving data
+	  when parsing the XML and accessing the data from the store
+	* headerOnly XML attribute implemented - if set, instruction appears
+	  rendered in bold font and its checkbox is preset
+	* Addional checks for null if some attributs are not defined in XML
+	M src/checklist/CheckListData.java
+	M src/checklist/XMLParser.java
+	M src/checklist/CheckListTableModel.java
+	M src/checklist/DataTable.java
+
+	* Some refactoring
+	M src/checklist/CheckList.java
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2009-03-03 Zdenek Maxa
+	* Tagging CheckList-00-00-25
+
+	* Major refactoring / reimplementation of DataTable, TableModel
+	R src/checklist/CheckListTable.java
+	A src/checklist/DataTable.java
+	A src/checklist/CheckListTableModel.java
+	M src/checklist/CheckListGUI.java
+
+	* Minor
+	M src/checklist/CheckListData.java
+	M src/checklist/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2009-02-19 Zdenek Maxa
+	* Tagging CheckList-00-00-24
+
+	* CheckList has now different command line interface
+	* When run with --show <checklist> or from RunCom, it only parses a
+	  single checklist that is needed and not all checklists (this increases
+	  robustness since RunCom doesn't fail for one system if another system
+	  has faulty checklist with which CheckList parsing fails)
+	* RunCom sends checklist file name and not checklist title
+	* CheckList sends back to RunCom checklist file name which was displayed
+	M src/checklist/CheckList.java
+	M src/checklist/CheckListGUI.java
+	M src/checklist/CheckListTable.java
+	M src/checklist/RunComCaller.java
+
+	* Minor
+	M src/checklist/CheckListException.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-10-15 Zdenek Maxa
+	* Tagging CheckList-00-00-23
+
+	* Multiple SystemAffected work when submitting into elog (| is a separator
+	  withing a single argument, so some reimplementation done)
+	M src/checklist/CheckList.java
+
+	* Minor
+	M src/checklist/XMLParser.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-10-01 Zdenek Maxa
+	* Tagging CheckList-00-00-22
+
+	* Confirmation dialog when making new Elog entry made differently
+	  (more intuitively)
+	* Implementing <ElogSystemAffected> tag handling for storing elog entries
+	  with systemaffected as set by subsystems in the XML checklists (rather
+	  than everything with default Other) (multiple ElogSystemAffected
+	  entries in the XML checklist are supported and handled appropriately,
+	  however when tralated into elog command line arguments, only the last
+	  one matters (being clarified with Federico)
+	M src/checklist/CheckList.java
+	M src/checklist/CheckListData.java
+	M src/checklist/XMLParser.java
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-09-13 Zdenek Maxa
+	* Tagging CheckList-00-00-21
+
+ 	* CheckList re-structured, now possible to run multiple CheckList
+          windows, it is no longer a singleton - corresponding changes done,
+	  RunComCaller very little affected
+	M src/checklist/CheckList.java
+	M src/checklist/CheckListGUI.java
+	M src/checklist/CheckListTable.java
+	M src/checklist/RunComCaller.java	
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-09-08 Zdenek Maxa
+	* Tagging CheckList-00-00-20
+
+	* Changing checklists titles: desk- to signin-, shifter- to DQcheck-
+	* Corresponding modification of the GUI menu bar - according to checklist
+	  types, new added (stablebea, etc)
+	* Gives notification that CheckList application is already running and
+	  can't open another checklist
+	M src/checklist/XMLParser.java
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-08-22 Zdenek Maxa
+	* Tagging CheckList-00-00-19
+
+	* Brought automatically to front and CheckList pops up, also
+	  setAlwaysOnTop
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-08-21 Zdenek Maxa
+	* Tagging CheckList-00-00-18
+
+	* Minor
+	M src/checklist/CheckListGUI.java
+
+	* Change of method name in RunCom
+	M src/checklist/RunComCaller.java
+
+	* TDAQ Release now taken from 'latest' link
+	M checklist.sh
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-26 Zdenek Maxa
+	* Tagging CheckList-00-00-17
+	
+	* Minor
+	M checklist.jar 
+	M src/checklist/CheckListException.java 
+	M src/checklist/CheckListGUI.java 
+	M src/checklist/CheckListTable.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-16 Zdenek Maxa
+	* Tagging CheckList-00-00-16
+
+	* Minor
+	M src/checklist/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-16 Zdenek Maxa
+	* Tagging CheckList-00-00-15
+
+	* New build with production ATLOG parameters
+	M src/checklist/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-16 Zdenek Maxa
+	* Tagging CheckList-00-00-14
+
+	* Debugging ATLOG (elog) inserting values
+	M src/checklist/CheckList.java
+
+	* Minor (adding some comments)
+	M src/checklist/CheckListGUI.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-16 Zdenek Maxa
+	* Tagging CheckList-00-00-13
+
+	* Minor
+	M src/checklist/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-16 Zdenek Maxa
+	* Tagging CheckList-00-00-12
+
+	* Bug fix - don't call RunCom when CheckList is executed as a stand-alone
+	  application
+	M src/checklist/CheckListGUI.java
+	M src/checklist/CheckList.java
+
+	* Minor (exec in the start script)
+	M checklist.sh
+
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-07-05 Zdenek Maxa
+	* Tagging CheckList-00-00-11
+
+	* Changes to ATLOG paramers (when inserting items into elog/ATLOG)
+	M src/checklist/CheckList.java
+
+	* Completing DQ (shifter) checklist - called from RunCom
+	M src/checklist/RunComCaller.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-05-14 Zdenek Maxa
+	* Tagging CheckList-00-00-10
+
+	* Interaction with RunCom implemented (RunComCaller classes) calls
+	  RunCom locally and sets status ready on a subsystem desk RunCom panel
+	A src/checklist/RunComCaller.java
+	M src/checklist/CheckListGUI.java
+
+	* Minor change
+	lib/mylogger.jar
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-05-05 Zdenek Maxa
+	* Tagging CheckList-00-00-09
+
+	* Minor
+	M checklist.sh
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-04-30 Zdenek Maxa
+	* Tagging CheckList-00-00-08
+
+	* Interaction with RunCom tested - calling method
+	  CheckList.showCheckListWindow() from RunCom via Reflection
+	  (method names clashes encountered due to both applications using
+	  implicit default package), otherwise works fine for CheckList in not
+	  stand-alone mode
+
+	* Source codes no longer in the implicit default package, everything put
+	  under checklist package
+	M /ant/build.xml
+	R src/CheckList.java
+	R src/CheckListData.java
+	R src/CheckListException.java
+	R src/CheckListGUI.java
+	R src/CheckListTable.java
+	R src/XMLParser.java
+	A src/checklist/CheckList.java
+	A src/checklist/CheckListData.java
+	A src/checklist/CheckListException.java
+	A src/checklist/CheckListGUI.java
+	A src/checklist/CheckListTable.java
+	A src/checklist/XMLParser.java
+
+	* Changes to scrolling
+	M lib/mylogger.jar
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-04-28 Zdenek Maxa
+	* Tagging CheckList-00-00-07
+
+	* CheckListGUI is (correctly) initialised via Swing event-dispatching
+	  thread now plus some other minor changes
+	M /src/CheckList.java
+	M src/CheckListGUI.java
+
+	* The start script tries to set up TDAQ release itself
+	M checklist.sh
+
+	* Default logging severity level changed back to INFO
+	M lib/mylogger.jar
+
+	* JAR build file updated
+	M checklist.jar
+	
+	* Thorsten confirms that logging messages insertion into ATLOG (elog)
+	  works fine
+
+-----------------------------------------------------------------------------
+2008-04-28 Zdenek Maxa
+	* Tagging CheckList-00-00-06
+
+	* Minor fix - set requested checklist to display when calling
+	  CheckList.setCurrentCheckList()
+	M src/CheckList.java 
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-04-25 Zdenek Maxa
+	* Tagging CheckList-00-00-05
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-04-25 Zdenek Maxa
+	* Tagging CheckList-00-00-04
+
+	* Work around for wrongly determined preferred size of TextArea within
+	  JTable implemented. Problem with loger instructions, row height
+	  incorrectly set to some cells causing instruction message partly hidden.
+	M src/CheckListTable.java
+
+	* GUI using debug logging output - this is implemented within mylogger.jar
+	  which now a reusable compoment (logging into an extra window with a
+	  JTextPane)
+	M src/CheckListGUI.java
+	M lib/mylogger.jar
+
+	* Minor
+	M src/CheckList.java
+
+-----------------------------------------------------------------------------
+2008-04-24 Zdenek Maxa
+	* Tagging CheckList-00-00-03
+
+	* Parsing XML file via InputStream, implemented resolveEntity() (helps
+	  to keep track of the entities included into the main XML file)
+	M src/XMLParser.java
+
+	* Display URL the help button is pointing to in table cell tooltip
+	M src/CheckListTable.java
+
+	* Implemented WindowAdapter (closingWindow)
+	M src/CheckListGUI.java
+
+	* Source XML CheckList.XML can be specified via command line option
+	  -r, --read <file>
+	M src/CheckList.java
+
+	* JAR build file updated
+	M checklist.jar
+
+-----------------------------------------------------------------------------
+2008-04-21 Zdenek Maxa
+	* Tagging CheckList-00-00-02
+
+-----------------------------------------------------------------------------
+2008-04-21 Zdenek Maxa
+	* Tagging CheckList-00-00-01
+
+	* Import finished
+
+-----------------------------------------------------------------------------
+2008-04-18 Zdenek Maxa
+	* Importing the new (reimplemented) CheckList application
+	  under atdaqcvs repository under /common/CheckList
+	
+	* ANT build file (for local usage)
+	A ant/build.xml
+
+	* Libraries
+	A commons-cli-1.0.jar Apache Jakarta utils (e.g. command line parsing)
+	A log4j-1.2.15.jar Apache advanced logging facility
+	A mylogger.jar Customised logging library build upon Apache log4j
+
+	* CheckList source codes under src directory
+
+	* Locally build binary JAR file to run via start script
+	A checklist.jar
+	A checklist.sh
+
+-----------------------------------------------------------------------------

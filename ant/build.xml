@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!-- CheckList build.xml file for ANT, local usage (ant installed locally) -->
+<!-- author: Zdenek Maxa -->
+
+<!-- basedir attribute to be adjusted - target build directory - - - - -  -->
+<project name="CheckList" default="usage" basedir="..">
+
+    <!-- begin properties - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- read in overriden properties from ant.properties file  - - - - - -->
+    <property file="ant.properties"/>
+    <property name="appName" value="CheckList"/>
+
+    <property name="classpath"
+        value="lib/log4j-1.2.15.jar lib/mylogger.jar lib/commons-cli-1.0.jar"/>
+        
+
+    <!-- directories - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <property name="src" value="src"/>
+    <property name="lib" value="lib"/>
+
+    <property name="classes" value="classes"/>
+
+    <!-- CheckList - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <property name="checklist.jar"        value="checklist.jar"/>
+    <property name="checklist.main.class" value="checklist.CheckList"/>
+
+
+
+    <!-- ===============================================================  -->
+    
+    <!-- targets begin  - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- ===============================================================  -->
+
+
+    
+    <!-- compile target   - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="compile" description="Compiles all source files">
+
+        <echo>
+            Executing target: compile
+        </echo>
+
+        <mkdir dir="${classes}"/>
+
+        <javac srcdir="${src}" destdir="${classes}" deprecation="on">
+            <!-- <compilerarg value="-Xlint:unchecked"/> -->
+            <include name="*/*.java"/>
+            <!-- */ one directory deep (checklist package name) -->
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+
+
+    <!-- jar target - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="jar" description="Create jar file for deployment">
+
+        <echo>
+            Executing target: jar
+        </echo>
+
+        <!-- jar - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+        <jar destfile="${checklist.jar}">
+            <fileset dir="${classes}">
+                <include name="*/*.class"/> <!-- */ directory checklist -->
+            </fileset>
+            <manifest>
+                <attribute name="Built-By"   value="${user.name}"/>
+                <attribute name="Main-Class" value="${checklist.main.class}"/>
+                <attribute name="Class-Path" value="${classpath}"/>
+                <attribute name="Implementation-Title" value="CheckList"/>
+            </manifest>
+        </jar>
+    </target>
+
+        
+    <!-- clean target  - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="clean" description="Erase *.class generated files">
+        <echo>
+            Executing target: clean
+        </echo>
+        <delete dir="${classes}"/>
+    </target>
+
+
+
+    <!-- all target  - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+    <target name="all" depends="compile, jar, clean"
+                       description="Copy runtime files, build and clean up"/>
+
+
+
+    <!-- usage target - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="usage" description="Prints usage hint">
+        <echo level="info" message="Usage:"/>
+        <echo>ant [usage|all]</echo>
+    </target>
+
+
+
+    <!-- help  target - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <target name="help" depends="usage" description="Prints usage hint"/>
+
+</project>
